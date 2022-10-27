@@ -1,9 +1,9 @@
 {
-  "name": "pose-detection-expo",
-  "displayName": "pose-detection-expo",
+  "name": "msa-camera-detection-expo",
+  "displayName": "msa-camera-detection-expo",
   "expo": {
-    "name": "pose-detection-expo",
-    "slug": "pose-detection-expo",
+    "name": "msa-camera-detection-expo",
+    "slug": "msa-camera-detection-expo",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

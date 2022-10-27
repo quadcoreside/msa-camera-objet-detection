@@ -91,7 +91,7 @@ export default function App() {
       await tf.ready();
 
       const model = await mobilenet.load(); //Class mobilnet
-      setModel(model); // SET GLOBAL MODEL in memset
+      setModel(model); // SET GLOBAL MODEL in memory
       // FIN du loading du modele de detection d'image
 
       // Ready!
@@ -117,10 +117,10 @@ export default function App() {
     gl: ExpoWebGLRenderingContext
   ) => {
     const loop = async () => {
-      // Get the tensor and run pose detection.
+      // Acquisition d'une image a un instant t
       const imageTensor = images.next().value as tf.Tensor3D;
 
-      const startTs = Date.now();
+      const startTs = Date.now(); // Calcul du temps emis pour le prediction
 
       // Prediction sur l'image a l'instant t au moyen de la camera et timing pour les fps
       const prediction = await model.classify(imageTensor);
@@ -133,19 +133,19 @@ export default function App() {
       
       const latency = Date.now() - startTs;
       setFps(Math.floor(1000 / latency)); //Set FPS 
-      tf.dispose([imageTensor]); //Free memory
+      tf.dispose([imageTensor]); //Libere la memoire
 
-      if (rafId.current === 0) {
+      if (rafId.current === 0) { //Pas de rendu
         return;
       }
 
       // Render camera preview manually when autorender=false.
-      if (!AUTO_RENDER) {
+      if (!AUTO_RENDER) { //Libere le rendu a l'ecran
         updatePreview();
         gl.endFrameEXP();
       }
 
-      rafId.current = requestAnimationFrame(loop);
+      rafId.current = requestAnimationFrame(loop); //Afin d'avoir un rendu lineaire en sortie graphique
     };
 
     loop(); // Boucle infini
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     left: 10,
     width: 80,
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, .7)',
+    backgroundColor: 'red',
     borderRadius: 2,
     padding: 8,
     zIndex: 20,
